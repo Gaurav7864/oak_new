@@ -5,12 +5,23 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var session = require("express-session");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var singuprouter = require('./routes/singup');
 var forgetrouter = require('./routes/forget')
 var app = express();
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(
+  session({
+    cookie: { sameSite: "lax", maxAge: oneDay },
+    resave: true,
+    secret: process.env.AUTH_KEY,
+    activeDuration: 5 * 60 * 1000,
+    saveUninitialized: true
+  })
+)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
