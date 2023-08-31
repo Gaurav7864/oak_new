@@ -3,14 +3,18 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var expressLayouts = require("express-ejs-layouts");
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var session = require("express-session");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var singuprouter = require('./routes/singup');
-var forgetrouter = require('./routes/forget')
+//
+const adminpath = [
+  {pathurl: '/', routeFile: 'index'},
+  {pathurl: '/singup', routeFile: 'singup'},
+  {pathurl: '/dashbord', routeFile: 'dashbord'},
+]
+
 var app = express();
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(
@@ -26,6 +30,7 @@ app.use(
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(expressLayouts);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -46,11 +51,10 @@ mongoose.connection.once('open',()=>{
 }).on('error',error=>{
   console.log("Oops! databse connection error :"+error);
 })
+adminpath.forEach((path) => {
+  app.use(path.pathurl, require('./routes' + path.routeFile));
+})
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/singup', singuprouter);
-app.use('/forget', forgetrouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

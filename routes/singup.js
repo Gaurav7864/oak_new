@@ -9,7 +9,7 @@ var userModel=require('../models/users.model');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('singup', { title: 'Express' });
+  res.render('singup', { layout: false, title: 'Express' });
 });
 router.post('/',async(req,res)=>{
   console.log("req.body", req.body);

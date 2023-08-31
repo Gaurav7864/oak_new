@@ -8,7 +8,7 @@ var responesManager = require('../utilities/responesManager');
 var userModel=require('../models/users.model');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Express' });
+  res.render('login', { layout: false, title: 'Express' });
 });
 // router.post('/', async(req, res) =>{
 //   if(Object.keys(req.body).length > 0){
@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 //       let primary = mongoConnection.useDb(constants.DEFAULT_DB);
 //       let checkExisting = await primary.model(constants.MODELS.users,userModel).findOne({email : req.body.email, password : req.body.password}).lean();
 //       if(checkExisting ≠ null){
-//         req.session.userid = checkExisting._id.toString();
+//         req.session.userId = checkExisting._id.toString();
 //         var goto = process.env.APP_URI + '/logout';
 //         res.writeHead(302, {'Location': goto});
 //         res.end=();
