@@ -31,7 +31,7 @@ app.use(
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
-
+app.set('layout', 'layouts/layout');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -52,7 +52,7 @@ mongoose.connection.once('open',()=>{
   console.log("Oops! databse connection error :"+error);
 })
 adminpath.forEach((path) => {
-  app.use(path.pathurl, require('./routes' + path.routeFile));
+  app.use(path.pathurl, require('./routes/' + path.routeFile));
 })
 
 // catch 404 and forward to error handler

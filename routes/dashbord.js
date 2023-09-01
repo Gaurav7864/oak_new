@@ -4,13 +4,20 @@ let mongoConnection = require('../utilities/connections');
 let constants = require('../utilities/constants');
 let responesManager = require('../utilities/responesManager');
 let userModel = require('../models/users.model');
-
+const async = require('async');
 /* GET users listing. */
-router.get('/', function (req, res) {
+router.get('/', async (req, res) => {
   if (req.session.userId) {
     let primary = mongoConnection.useDb(constants.DEFAULT_DB);
+    let userData = await primary.model(constants.MODELS.users, userModel).findById(req.session.userId).lean();
+    if (userData) {
+      res.render('deshbord', { title: 'dashborad' });
+    } else {
+      res.redirect('/');
     }
-  res.send('respond with a resource');
+  } else {
+    res.redirect('/');
+  }
 });
 
 module.exports = router;
