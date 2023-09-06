@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
     let primary = mongoConnection.useDb(constants.DEFAULT_DB);
     let userData = await primary.model(constants.MODELS.users, userModel).findById(req.session.userId).lean();
     if (userData) {
-      res.render('deshbord', { title: 'dashborad' });
+      res.render('dashborad', { title: 'dashborad' });
     } else {
       res.redirect('/');
     }

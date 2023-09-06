@@ -5,7 +5,7 @@ var async = require('async');
 const mongoConnection = require('../utilities/connections');
 const constants = require('../utilities/constants');
 const responseManager = require('../utilities/responesManager');
-const helper = require('../utilities/helpper');
+const helper = require('../utilities/helper');
 var userModel = require('../models/users.model');
 
 /* GET home page. */
@@ -24,14 +24,14 @@ router.post('/', async (req, res) => {
         console.log("newuser", newuser);
         return responseManager.onSuccess('user Created Successfully..', newuser, res);
       } else {
-        return responseManager.badrequest("Email id already exist, Please try again with new email...", res);
+        return responseManager.badrequest({ message :"Email id already exist, Please try again with new email..."}, res);
       }
 
     } else {
-      return responseManager.badrequest("Invalid email to create user, Please try again", res);
+      return responseManager.badrequest({ message :"Invalid email to create user, Please try again"}, res);
     }
   } else {
-    return responseManager.badrequest("Invalid data to create user, Please try again", res);
+    return responseManager.badrequest({ message :"Invalid data to create user, Please try again"}, res);
   }
 });
 

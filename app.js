@@ -12,7 +12,7 @@ var session = require("express-session");
 const adminpath = [
   {pathurl: '/', routeFile: 'index'},
   {pathurl: '/singup', routeFile: 'singup'},
-  {pathurl: '/dashbord', routeFile: 'dashbord'},
+  {pathurl: '/dashborad', routeFile: 'dashborad'},
 ]
 
 var app = express();

@@ -1,0 +1,19 @@
+# Query: dashbord
+# ContextLines: 1
+
+5 results - 3 files
+
+app.js:
+  14    {pathurl: '/singup', routeFile: 'singup'},
+  15:   {pathurl: '/dashborad', routeFile: 'dashborad'},
+  16  ]
+
+public/javascripts/controllers/logincontroller.js:
+  13              if(response.data.IsSuccess == true && response.data.Data != 0){
+  14:                 window.location.href = "/dashborad";
+  15              }else{
+
+routes/dashbord.js:
+  13      if (userData) {
+  14:       res.render('dashborad', { title: 'dashborad' });
+  15      } else {

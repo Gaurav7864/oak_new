@@ -11,14 +11,14 @@ app.controller("Singupcontroller", ($scope, $http) => {
         },
       }).then(
         function (response){
-            if(response.data.IsSuccess ==  && response.data.Data != 0){
+            if(response.data.IsSuccess == true && response.data.Data != 0){
                 window.location.href = "/";
             }else{
-                swal("Oops", response.data.Message, "error")
+                swal("Oops", response.data.Message, "error");
             }
         },
         function (error) {
-        console.log(error);
+            swal("Oops", error.data.Message, "error");
         if (error.status = 401) {
             window.location,href = AUTO_LOGOUT;
         }
